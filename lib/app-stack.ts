@@ -25,7 +25,7 @@ export class AppStack extends cdk.Stack {
           repo: 'aws-pipeline-demo',
           branch: 'main',
           actionName: 'Pipeline_Source',
-          oauthToken: SecretValue.secretsManager('CDK_Pipeline_Github_Access_Token'),
+          oauthToken: SecretValue.secretsManager('github-token'),
           output: sourceOutput
         })
       ]
