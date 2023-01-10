@@ -42,7 +42,7 @@ export class AppStack extends cdk.Stack {
           outputs: [ cdkBuildOutput ],
           project: new PipelineProject(this, 'CdkBuildProject', {
             environment: {
-              buildImage: LinuxBuildImage.AMAZON_LINUX_2
+              buildImage: LinuxBuildImage.AMAZON_LINUX_2_4
             },
             buildSpec: BuildSpec.fromSourceFilename('build-specs/cdk-build-spec.yml')
           })
