@@ -2,7 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { SecretValue } from 'aws-cdk-lib';
 import { BuildSpec, LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
 import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
-import { CodeBuildAction, GitHubSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
+import { CloudFormationCreateUpdateStackAction, CodeBuildAction, GitHubSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
 import { Construct } from 'constructs';
 
 export class AppStack extends cdk.Stack {
@@ -46,6 +46,18 @@ export class AppStack extends cdk.Stack {
             },
             buildSpec: BuildSpec.fromSourceFilename('build-specs/cdk-build-spec.yml')
           })
+        })
+      ]
+    })
+
+    pipeline.addStage({
+      stageName: 'Pipeline_Update',
+      actions: [
+        new CloudFormationCreateUpdateStackAction({
+          actionName: 'Pipeline_Update',
+          stackName: 'AppStack',
+          templatePath: cdkBuildOutput.atPath('AppStack.template.json'),
+          adminPermissions: true,
         })
       ]
     })
