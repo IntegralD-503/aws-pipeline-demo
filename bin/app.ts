@@ -11,5 +11,5 @@ new AppStack(app, 'AppStack', {
 
 new BillingStack(app, 'BillingStack', {
   budgetAmount: 5,
-  emailAddress: 'hunter.clark@utxas.edu'
+  emailAddress: 'hunter.clark@utexas.edu'
 });
