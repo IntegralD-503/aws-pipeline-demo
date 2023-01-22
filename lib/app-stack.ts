@@ -15,7 +15,8 @@ export class AppStack extends cdk.Stack {
 
     });
 
-    const sourceOutput = new Artifact('SourceOutput');
+    const cdkSourceOutput = new Artifact('CDKSourceOutput');
+    const serviceSourceOutput = new Artifact('ServiceSourceOutput');
 
     pipeline.addStage({
       stageName:'Source',
@@ -26,7 +27,15 @@ export class AppStack extends cdk.Stack {
           branch: 'main',
           actionName: 'Pipeline_Source',
           oauthToken: SecretValue.secretsManager('github-token'),
-          output: sourceOutput
+          output: cdkSourceOutput
+        }),
+        new GitHubSourceAction({
+          owner: 'IntegralD-503',
+          repo: 'express-lambda',
+          branch: 'main',
+          actionName: 'Service_Source',
+          oauthToken: SecretValue.secretsManager('github-token'),
+          output: serviceSourceOutput
         })
       ]
     });
@@ -38,7 +47,7 @@ export class AppStack extends cdk.Stack {
       actions: [
         new CodeBuildAction({
           actionName: 'CDK_Build',
-          input: sourceOutput,
+          input: cdkSourceOutput,
           outputs: [ cdkBuildOutput ],
           project: new PipelineProject(this, 'CdkBuildProject', {
             environment: {
