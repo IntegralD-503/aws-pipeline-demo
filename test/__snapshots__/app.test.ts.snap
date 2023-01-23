@@ -406,6 +406,7 @@ exports[`App Stack 1`] = `
           "Type": "S3",
         },
         "Name": "Pipeline",
+        "RestartExecutionOnUpdate": true,
         "RoleArn": {
           "Fn::GetAtt": [
             "PipelineRoleD68726F7",
