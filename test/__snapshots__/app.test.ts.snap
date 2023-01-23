@@ -446,7 +446,7 @@ exports[`App Stack 1`] = `
                   "Version": "1",
                 },
                 "Configuration": {
-                  "Branch": "main",
+                  "Branch": "master",
                   "OAuthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
                   "Owner": "IntegralD-503",
                   "PollForSourceChanges": false,

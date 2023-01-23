@@ -32,7 +32,7 @@ export class AppStack extends cdk.Stack {
         new GitHubSourceAction({
           owner: 'IntegralD-503',
           repo: 'express-lambda',
-          branch: 'main',
+          branch: 'master',
           actionName: 'Service_Source',
           oauthToken: SecretValue.secretsManager('github-token'),
           output: serviceSourceOutput
