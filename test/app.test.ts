@@ -2,7 +2,7 @@ import { App } from "aws-cdk-lib"
 import { Capture, Match, Template } from "aws-cdk-lib/assertions";
 import { AppStack } from "../lib/app-stack";
 import { BillingStack } from "../lib/billing-stack";
-import { ServiceStack } from "../lib/server-stack";
+import { ServiceStack } from "../lib/service-stack";
 
 test('App Stack', () => {
     const app = new App();
@@ -14,7 +14,9 @@ test('App Stack', () => {
 test('Adding Service Stage', () => {
 
     const app = new App();
-    const serviceStack = new ServiceStack(app, "ServiceStack");
+    const serviceStack = new ServiceStack(app, "ServiceStack", {
+        stageName: "Test"
+    });
     const pipelineStack = new AppStack(app, "AppStack");
 
     // when
@@ -49,7 +51,9 @@ test('Adding Service Stage', () => {
 
 test("Adding Billing Stack to a Stage", () => {
     const app = new App();
-    const serviceStack = new ServiceStack(app, "ServiceStack");
+    const serviceStack = new ServiceStack(app, "ServiceStack", {
+        stageName: "Test"
+    });
     const pipelineStack = new AppStack(app, "AppStack");
     const billingStack = new BillingStack(app, 'BillingStack', {
         budgetAmount: 5,
