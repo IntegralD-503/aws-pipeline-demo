@@ -5,7 +5,7 @@ import { Artifact, IStage, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
 import { CloudFormationCreateUpdateStackAction, CodeBuildAction, GitHubSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
 import { Construct } from 'constructs';
 import { BillingStack } from './billing-stack';
-import { ServiceStack } from './server-stack';
+import { ServiceStack } from './service-stack';
 
 export class AppStack extends cdk.Stack {
   private readonly pipeline: Pipeline;
