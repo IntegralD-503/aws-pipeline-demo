@@ -572,6 +572,12 @@ exports[`App Stack 1`] = `
       },
       "Type": "AWS::CodePipeline::Pipeline",
     },
+    "PipelineNotificationsTopic827A419F": {
+      "Properties": {
+        "TopicName": "PipelineNotificationsTopic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
     "PipelinePipelineUpdateCodePipelineActionRoleDefaultPolicy024C1709": {
       "Properties": {
         "PolicyDocument": {
