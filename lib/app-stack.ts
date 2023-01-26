@@ -6,6 +6,7 @@ import { CloudFormationCreateUpdateStackAction, CodeBuildAction, CodeBuildAction
 import { EventField, RuleTargetInput } from 'aws-cdk-lib/aws-events';
 import { SnsTopic } from 'aws-cdk-lib/aws-events-targets';
 import { Topic } from 'aws-cdk-lib/aws-sns';
+import { EmailSubscription } from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { BillingStack } from './billing-stack';
 import { ServiceStack } from './service-stack';
@@ -23,6 +24,8 @@ export class AppStack extends cdk.Stack {
     this.pipelineNotificationsTopic = new Topic(this, "PipelineNotificationsTopic", {
       topicName: "PipelineNotificationsTopic"
     })
+
+    this.pipelineNotificationsTopic.addSubscription(new EmailSubscription('d503.the.integral@gmail.com'));
 
     this.pipeline = new Pipeline(this, 'Pipeline', {
       pipelineName: 'Pipeline',

@@ -578,6 +578,16 @@ exports[`App Stack 1`] = `
       },
       "Type": "AWS::SNS::Topic",
     },
+    "PipelineNotificationsTopicd503theintegralgmailcomC050B791": {
+      "Properties": {
+        "Endpoint": "d503.the.integral@gmail.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "PipelineNotificationsTopic827A419F",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
     "PipelinePipelineUpdateCodePipelineActionRoleDefaultPolicy024C1709": {
       "Properties": {
         "PolicyDocument": {

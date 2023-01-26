@@ -1,6 +1,6 @@
 import { App, Stack } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { Budget } from "../lib/constructs/budget";
+import { Budget } from "../../lib/constructs/budget";
 
 test('Budget construct', () => {
     const app  = new App();
