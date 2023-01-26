@@ -18,7 +18,7 @@ export class ServiceHealthCanary extends Construct {
         super(scope,id);
 
         const canary = new Canary(this, props.canaryName, {
-            runtime: Runtime.SYNTHETICS_NODEJS_PUPPETEER_3_0,
+            runtime: Runtime.SYNTHETICS_NODEJS_PUPPETEER_3_1,
             canaryName: props.canaryName,
             schedule: Schedule.rate(Duration.minutes(1)),
             environmentVariables: {
