@@ -4,6 +4,8 @@ import { CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Stats, TreatMissingData } from "aws-cdk-lib/aws-cloudwatch";
 import { LambdaDeploymentConfig, LambdaDeploymentGroup } from "aws-cdk-lib/aws-codedeploy";
 import { Alias, CfnParametersCode, Code, Function, Runtime } from "aws-cdk-lib/aws-lambda";
+import { Topic } from "aws-cdk-lib/aws-sns";
+import { EmailSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
 import { Construct } from "constructs";
 import { ServiceHealthCanary } from "./constructs/service-health-canary";
 
@@ -60,10 +62,17 @@ export class ServiceStack extends Stack {
                 ]
             })
 
+            const alarmTopic = new Topic(this, "ServiceAlarmTopic", {
+                topicName: "ServiceAlarmTopic"
+            });
+
+            alarmTopic.addSubscription(new EmailSubscription("hunter.clark@utexas.edu"));
+
             new ServiceHealthCanary(this, "ServiceCanary", {
                 apiEndpoint: httpApi.apiEndpoint,
-                canaryName: "service-canary"
-            })
+                canaryName: "service-canary",
+                alarmTopic: alarmTopic,
+            });
         }
 
        this.serviceEndpointOutput = new CfnOutput(this, "ApiEndpointOutput", {
